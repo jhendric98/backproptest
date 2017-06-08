@@ -65,6 +65,11 @@ class NeuralNetwork(object):
             delta_weights_i_h += hidden_error_term * X[:, None]
 
             # Weight step (hidden to output)
+            print("output_error_term shape: ", output_error_term.shape, " value: ", output_error_term, type(output_error_term))
+            print("hidden_outputs shape: ", hidden_outputs.shape, " value: ", hidden_outputs)
+            print(output_error_term * hidden_outputs)
+            # TODO: My problem here is the shape of the delta_weights_h_o variable since I morphed the others. Fix shapes to match
+
             delta_weights_h_o += output_error_term * hidden_outputs
 
 
