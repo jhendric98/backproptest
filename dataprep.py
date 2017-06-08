@@ -5,7 +5,7 @@ data_path = 'Bike-Sharing-Dataset/hour.csv'
 
 rides = pd.read_csv(data_path)
 
-print(rides.head())
+#print(rides.head())
 
 
 
@@ -18,7 +18,7 @@ fields_to_drop = ['instant', 'dteday', 'season', 'weathersit',
                   'weekday', 'atemp', 'mnth', 'workingday', 'hr']
 data = rides.drop(fields_to_drop, axis=1)
 
-print(data.head())
+#print(data.head())
 
 
 quant_features = ['casual', 'registered', 'cnt', 'temp', 'hum', 'windspeed']

@@ -1,3 +1,5 @@
+import numpy as np
+
 class NeuralNetwork(object):
     def __init__(self, input_nodes, hidden_nodes, output_nodes, learning_rate):
         # Set number of nodes in input, hidden and output layers.
@@ -74,13 +76,8 @@ class NeuralNetwork(object):
             delta_weights_i_h += hidden_error_term * X[:, None]
 
             # Weight step (hidden to output)
-            print("shape of output_error_term: ", output_error_term.shape, " value: ", output_error_term)
-            print(type(output_error_term))
-            print("shape of hidden_outputs: ", hidden_outputs.shape, " value: ", hidden_outputs)
-
             delta_weights_h_o += output_error_term[:, None] * hidden_outputs
 
-            print("delta_weights_h_o: ", delta_weights_h_o.shape, " value: ", delta_weights_h_o)
 
         # TODO: Update the weights - Replace these values with your calculations.
         self.weights_hidden_to_output += self.weights_hidden_to_output  # self.lr * delta_weights_h_o / n_records # update hidden-to-output weights with gradient descent step
