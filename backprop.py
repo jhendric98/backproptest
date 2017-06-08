@@ -12,7 +12,7 @@ def sigmoid(x):
 
 # Hyperparameters
 n_hidden = 2  # number of hidden units
-epochs = 900
+epochs = 10
 learnrate = 0.005
 
 n_records, n_features = features.shape
@@ -37,35 +37,28 @@ for e in range(epochs):
         hidden_output = sigmoid(hidden_input)
 
         print("shape of hidden_input: ", hidden_input.shape)
+        print("shape of weights_input_hidden: ", weights_input_hidden.shape)
         print("shape of hidden_output: ", hidden_output.shape)
 
         output = sigmoid(np.dot(hidden_output,
                                 weights_hidden_output))
 
         print("shape of weights_hidden_output: ", weights_hidden_output.shape)
-        print(weights_hidden_output)
+        print("weights_hidden_output: ", weights_hidden_output)
         print("shape of output: ", output.shape)
 
         ## Backward pass ##
         # TODO: Calculate the network's prediction error
         error = y - output
 
-        print("shape of error: ", error.shape)
-
 
         # TODO: Calculate error term for the output unit
         output_error_term = error * output * (1 - output)
-
-        print("shape of output_error_term: ", output_error_term.shape)
 
         ## propagate errors to hidden layer
 
         # TODO: Calculate the hidden layer's contribution to the error
         hidden_error = np.dot(output_error_term, weights_hidden_output)
-
-        print("Shape of hidden_error: ", hidden_error.shape, "vlue: ", hidden_error)
-        print("Shape of weights_hidden_output: ", weights_hidden_output.shape, "vlue: ", weights_hidden_output)
-
 
 
         # TODO: Calculate the error term for the hidden layer
