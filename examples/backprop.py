@@ -1,5 +1,6 @@
 import numpy as np
-from data_prep import features, targets, features_test, targets_test
+
+from examples.data_prep import features, targets, features_test, targets_test
 
 np.random.seed(21)
 
@@ -28,44 +29,56 @@ for e in range(epochs):
     del_w_hidden_output = np.zeros(weights_hidden_output.shape)
     for x, y in zip(features.values, targets):
 
-        print("shape of x: ", x.shape)
-        print("shape of y: ", y.shape, "value of y: ", y)
+        print("shape of x: ", x.shape, " value: ", x)
+        print("shape of y: ", y.shape, " value: ", y)
+
+        print("shape of weights_input_hidden: ", weights_input_hidden.shape, " value: ", weights_input_hidden)
 
         ## Forward pass ##
         # TODO: Calculate the output
         hidden_input = np.dot(x, weights_input_hidden)
         hidden_output = sigmoid(hidden_input)
 
-        print("shape of hidden_input: ", hidden_input.shape)
-        print("shape of weights_input_hidden: ", weights_input_hidden.shape)
-        print("shape of hidden_output: ", hidden_output.shape)
+        print("shape of hidden_input: ", hidden_input.shape, " value: ", hidden_input)
+        print("shape of hidden_output: ", hidden_output.shape, " value: ",  hidden_output)
+        print("shape of weights_hidden_output: ", weights_hidden_output.shape, " value: ", weights_hidden_output)
 
         output = sigmoid(np.dot(hidden_output,
                                 weights_hidden_output))
 
-        print("shape of weights_hidden_output: ", weights_hidden_output.shape)
-        print("weights_hidden_output: ", weights_hidden_output)
-        print("shape of output: ", output.shape)
+        print("shape of output: ", output.shape, " value: ", output)
+
 
         ## Backward pass ##
         # TODO: Calculate the network's prediction error
         error = y - output
 
+        print("shape of error: ", error.shape, " value: ", error)
+
 
         # TODO: Calculate error term for the output unit
         output_error_term = error * output * (1 - output)
+
+        print("shape of output_error_term: ", output_error_term.shape, " value: ", output_error_term)
 
         ## propagate errors to hidden layer
 
         # TODO: Calculate the hidden layer's contribution to the error
         hidden_error = np.dot(output_error_term, weights_hidden_output)
 
+        print("shape of hidden_error: ", hidden_error.shape, " value: ", hidden_error)
+
 
         # TODO: Calculate the error term for the hidden layer
         hidden_error_term = hidden_error * hidden_output * (1 - hidden_output)
 
+        print("shape of hidden_error_term: ", hidden_error_term.shape, " value: ", hidden_error_term)
+
         # TODO: Update the change in weights
+        print("output_error_term: ", output_error_term.shape)
+        print("hidden_output: ", hidden_output.shape)
         del_w_hidden_output += output_error_term * hidden_output
+        print("del_w_hidden_output: ", del_w_hidden_output)
         del_w_input_hidden += hidden_error_term * x[:, None]
 
     # TODO: Update weights
